@@ -18,10 +18,11 @@
             <div class="col-md-2 mb-4 mb-md-0">
                 <h6 class="fw-bold mb-3">Ajuda</h6>
                 <ul class="list-unstyled small text-muted">
+                    <li><a href="contato.php" class="text-muted text-decoration-none">Fale Conosco</a></li>
+                    <li><a href="meus_pedidos.php" class="text-muted text-decoration-none">Rastrear Pedido</a></li>
                     <li class="mb-1"><a href="#" class="text-decoration-none text-muted">Trocas e Devoluções</a></li>
                     <li class="mb-1"><a href="#" class="text-decoration-none text-muted">Política de Privacidade</a></li>
                     <li class="mb-1"><a href="#" class="text-decoration-none text-muted">Termo de Uso</a></li>
-                    <li><a href="#" class="text-decoration-none text-muted">Rastrear Pedido</a></li>
                 </ul>
             </div>
 

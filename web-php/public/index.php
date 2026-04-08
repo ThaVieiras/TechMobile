@@ -58,19 +58,26 @@ $mais_vendidos = $stmtMV->fetchAll(PDO::FETCH_ASSOC);
             <?php foreach ($produtos_destaque as $p): ?>
                 <div class="col">
                     <div class="card h-100 shadow-sm border-0 text-center">
+                        <a href="detalhe_produto.php?id=<?php echo $p['id_produto']; ?>">
+                            <div class="d-flex align-items-center justify-content-center p-3" style="height: 180px;">
+                                <?php if (!empty($p['imagem_url'])): ?>
+                                    <img src="assets/img/<?php echo $p['imagem_url']; ?>" alt="<?php echo $p['nome']; ?>" class="img-fluid" style="max-height: 100%; object-fit: contain;">
+                                <?php else: ?>
+                                    <div class="bg-secondary-subtle w-100 h-100 d-flex align-items-center justify-content-center rounded">
+                                        <span class="text-muted small">Sem foto</span>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                        </a>
 
-                        <div class="d-flex align-items-center justify-content-center p-3" style="height: 180px;">
-                            <?php if (!empty($p['imagem_url'])): ?>
-                                <img src="assets/img/<?php echo $p['imagem_url']; ?>" alt="<?php echo $p['nome']; ?>" class="img-fluid" style="max-height: 100%; object-fit: contain;">
-                            <?php else: ?>
-                                <div class="bg-secondary-subtle w-100 h-100 d-flex align-items-center justify-content-center rounded">
-                                    <span class="text-muted small">Sem foto</span>
-                                </div>
-                            <?php endif; ?>
-                        </div>
                         <div class="card-body">
-                            <h6 class="card-title text-truncate small"><?php echo $p['nome']; ?></h6>
+                            <h6 class="card-title text-truncate small">
+                                <a href="detalhe_produto.php?id=<?php echo $p['id_produto']; ?>" class="text-decoration-none text-dark fw-bold">
+                                    <?php echo $p['nome']; ?>
+                                </a>
+                            </h6>
                             <p class="card-text fw-bold text-primary">R$ <?php echo number_format($p['preco'], 2, ',', '.'); ?></p>
+
                             <a href="add.php?id=<?php echo $p['id_produto']; ?>" class="btn btn-primary btn-sm w-100 btn-add">Adicionar ao carrinho</a>
                         </div>
                     </div>
@@ -89,11 +96,24 @@ $mais_vendidos = $stmtMV->fetchAll(PDO::FETCH_ASSOC);
             <?php foreach ($mais_vendidos as $mv): ?>
                 <div class="col">
                     <div class="card h-100 border-0 bg-transparent text-center">
-                        <div class="d-flex align-items-center justify-content-center mb-2" style="height: 180px;">
-                            <span class="text-muted small">Imagem <?php echo $mv['nome']; ?></span>
-                        </div>
+                        <a href="detalhe_produto.php?id=<?php echo $mv['id_produto']; ?>">
+                            <div class="d-flex align-items-center justify-content-center mb-2" style="height: 180px;">
+                                <?php if (!empty($mv['imagem_url'])): ?>
+                                    <img src="assets/img/<?php echo $mv['imagem_url']; ?>" alt="<?php echo $mv['nome']; ?>" class="img-fluid" style="max-height: 100%; object-fit: contain;">
+                                <?php else: ?>
+                                    <div class="bg-secondary-subtle w-100 h-100 d-flex align-items-center justify-content-center rounded">
+                                        <span class="text-muted small">Sem foto</span>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                        </a>
+
                         <div class="card-body p-2">
-                            <h6 class="text-truncate small mb-1"><?php echo $mv['nome']; ?></h6>
+                            <h6 class="text-truncate small mb-1">
+                                <a href="detalhe_produto.php?id=<?php echo $mv['id_produto']; ?>" class="text-decoration-none text-dark">
+                                    <?php echo $mv['nome']; ?>
+                                </a>
+                            </h6>
                             <p class="fw-bold mb-1">R$ <?php echo number_format($mv['preco'], 2, ',', '.'); ?></p>
                             <p class="text-muted small" style="font-size: 11px;">Até 12x sem juros</p>
                             <a href="add.php?id=<?php echo $mv['id_produto']; ?>" class="btn btn-primary btn-sm w-100 btn-add">Adicionar ao carrinho</a>
@@ -107,12 +127,12 @@ $mais_vendidos = $stmtMV->fetchAll(PDO::FETCH_ASSOC);
     <section class="container my-5 py-5 border-top">
         <h4 class="text-center fw-bold mb-5">Compre por marcas</h4>
         <div class="row justify-content-center align-items-center g-5 text-center">
-            <div class="col-4 col-md-2"><img src="assets/img/logo-apple.png" class="brand-logo img-fluid"></div>
-            <div class="col-4 col-md-2"><img src="assets/img/logo-samsung.png" class="brand-logo img-fluid"></div>
-            <div class="col-4 col-md-2"><img src="assets/img/logo-motorola.png" class="brand-logo img-fluid"></div>
-            <div class="col-4 col-md-2"><img src="assets/img/logo-xiaomi.png" class="brand-logo img-fluid"></div>
-            <div class="col-4 col-md-2"><img src="assets/img/logo-lg.png" class="brand-logo img-fluid"></div>
-            <div class="col-4 col-md-2"><img src="assets/img/logo-poco.png" class="brand-logo img-fluid"></div>
+            <div class="col-4 col-md-2"><a href="produtos.php?busca=Apple"><img src="assets/img/logo-apple.png" class="brand-logo img-fluid"></a></div>
+            <div class="col-4 col-md-2"><a href="produtos.php?busca=Samsung"><img src="assets/img/logo-samsung.png" class="brand-logo img-fluid"></a></div>
+            <div class="col-4 col-md-2"><a href="produtos.php?busca=Motorola"><img src="assets/img/logo-motorola.png" class="brand-logo img-fluid"></a></div>
+            <div class="col-4 col-md-2"><a href="produtos.php?busca=Xiaomi"><img src="assets/img/logo-xiaomi.png" class="brand-logo img-fluid"></a></div>
+            <div class="col-4 col-md-2"><a href="produtos.php?busca=Lg"><img src="assets/img/logo-lg.png" class="brand-logo img-fluid"></a></div>
+            <div class="col-4 col-md-2"><a href="produtos.php?busca=Poco"><img src="assets/img/logo-poco.png" class="brand-logo img-fluid"></a></div>
         </div>
     </section>
 

@@ -1,32 +1,30 @@
 <style>
-    .top-bar {
-        background-color: #0e409dff; 
-        color: white;
-        font-size: 13px;
-        padding: 8px 0;
-        letter-spacing: 1px;
+    /* --- Novos Estilos para os Cards da Loja --- */
+    .transition { 
+        transition: all 0.3s ease; 
     }
-    /* Estilo para os links do menu conforme o Wireframe */
-    .nav-link-custom {
-        color: #1a1a1a;
-        text-decoration: none;
-        font-weight: 800; /* Mais negrito */
-        font-size: 15px;
-        padding: 10px 15px;
+
+    .hover-shadow:hover { 
+        transform: translateY(-5px); 
+        box-shadow: 0 10px 20px rgba(0,0,0,0.12) !important; 
+    }
+
+    .btn-primary-custom { 
+        background-color: #0d6efd; 
+        border: none; 
+        border-radius: 50px; 
+        font-weight: 600;
         transition: 0.3s;
     }
-    .nav-link-custom:hover {
-        color: #0056b3;
+
+    .btn-primary-custom:hover { 
+        background-color: #0a58ca; 
     }
-    .search-input {
-        border-radius: 5px; /* Menos arredondado para bater com o design */
-        background-color: #f1f3f4;
-        border: 1px solid #ddd;
-        padding: 10px 20px;
-    }
-    .user-links {
-        font-size: 13px;
-        color: #666;
+
+    .btn-outline-custom {
+        border-radius: 50px;
+        font-weight: 600;
+        border-width: 2px;
     }
 </style>
 
@@ -44,10 +42,14 @@
             </div>
 
             <div class="col-md-6">
-                <div class="input-group">
-                    <input type="text" class="form-control search-input" placeholder="Buscar produtos por modelos">
-                    <button class="btn btn-outline-secondary border-0 bg-light">🔍</button>
-                </div>
+                <form action="produtos.php" method="GET">
+                    <div class="input-group">
+                        <input type="text" name="busca" class="form-control search-input"
+                            placeholder="Buscar produtos por modelos"
+                            value="<?php echo $_GET['busca'] ?? ''; ?>">
+                        <button type="submit" class="btn btn-outline-secondary border-0 bg-light">🔍</button>
+                    </div>
+                </form>
             </div>
 
             <div class="col-md-4 d-flex justify-content-end align-items-center gap-4">
@@ -57,9 +59,11 @@
                         <?php echo count($_SESSION['carrinho'] ?? []); ?>
                     </span>
                 </a>
+
                 <div class="user-links ms-2">
-                    <?php if(isset($_SESSION['cliente_nome'])): ?>
-                        Olá, <strong><?php echo explode(' ', $_SESSION['cliente_nome'])[0]; ?></strong> | 
+                    <a href="contato.php" class="text-muted text-decoration-none me-3">Contato</a>
+                    <?php if (isset($_SESSION['cliente_nome'])): ?>
+                        Olá, <strong><?php echo explode(' ', $_SESSION['cliente_nome'])[0]; ?></strong> |
                         <a href="limpar.php" class="text-decoration-none">Sair</a>
                     <?php else: ?>
                         <a href="login.php" class="text-muted text-decoration-none">Cadastra-se/Minha Conta</a>
