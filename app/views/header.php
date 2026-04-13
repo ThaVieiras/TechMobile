@@ -1,38 +1,9 @@
-<style>
-    /* --- Novos Estilos para os Cards da Loja --- */
-    .transition { 
-        transition: all 0.3s ease; 
-    }
-
-    .hover-shadow:hover { 
-        transform: translateY(-5px); 
-        box-shadow: 0 10px 20px rgba(0,0,0,0.12) !important; 
-    }
-
-    .btn-primary-custom { 
-        background-color: #0d6efd; 
-        border: none; 
-        border-radius: 50px; 
-        font-weight: 600;
-        transition: 0.3s;
-    }
-
-    .btn-primary-custom:hover { 
-        background-color: #0a58ca; 
-    }
-
-    .btn-outline-custom {
-        border-radius: 50px;
-        font-weight: 600;
-        border-width: 2px;
-    }
-</style>
-
 <div class="top-bar text-center">
     Tecnologia a um clique de distância.
 </div>
 
 <header class="bg-white border-bottom shadow-sm">
+    <link rel="stylesheet" href="assets/css/style.css">
     <div class="container py-3">
         <div class="row align-items-center">
             <div class="col-md-2">
@@ -52,21 +23,26 @@
                 </form>
             </div>
 
-            <div class="col-md-4 d-flex justify-content-end align-items-center gap-4">
-                <a href="#" class="text-secondary fs-4">❤️</a>
-                <a href="carrinho.php" class="text-secondary fs-4 position-relative">
-                    🛒 <span class="badge bg-primary rounded-pill position-absolute top-0 start-100 translate-middle" style="font-size: 10px;">
+            <div class="col-md-4 d-flex justify-content-end align-items-center gap-3">
+                <a href="#" class="text-decoration-none fs-5" title="Favoritos">❤️</a>
+
+                <a href="carrinho.php" class="text-secondary position-relative me-2">
+                    <span class="fs-4">🛒</span>
+                    <span class="badge bg-primary rounded-pill position-absolute top-0 start-100 translate-middle" style="font-size: 0.6rem;">
                         <?php echo count($_SESSION['carrinho'] ?? []); ?>
                     </span>
                 </a>
 
-                <div class="user-links ms-2">
-                    <a href="contato.php" class="text-muted text-decoration-none me-3">Contato</a>
+                <div class="vr mx-2 text-muted" style="height: 30px; opacity: 0.2;"></div>
+
+                <div class="user-menu d-flex flex-column lh-sm">
+                    <a href="contato.php" class="text-muted text-decoration-none small fw-bold hover-blue">Contato</a>
                     <?php if (isset($_SESSION['cliente_nome'])): ?>
-                        Olá, <strong><?php echo explode(' ', $_SESSION['cliente_nome'])[0]; ?></strong> |
-                        <a href="limpar.php" class="text-decoration-none">Sair</a>
+                        <span class="small text-muted">Olá, <a href="minha_conta.php" class="text-primary fw-bold text-decoration-none"><?php echo explode(' ', $_SESSION['cliente_nome'])[0]; ?></a></span>
+                        <a href="limpar.php" class="text-danger extra-small text-decoration-none">Sair</a>
                     <?php else: ?>
-                        <a href="login.php" class="text-muted text-decoration-none">Cadastra-se/Minha Conta</a>
+                        <a href="login.php" class="text-dark text-decoration-none small fw-bold hover-blue">Minha Conta</a>
+                        <a href="cadastro.php" class="text-muted text-decoration-none extra-small">Cadastre-se</a>
                     <?php endif; ?>
                 </div>
             </div>

@@ -24,7 +24,7 @@ else {
 
 $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-// Lógica para definir o título da página qd usuário clicar em uma categoria ou fizer uma busca
+// Lógica para definir o título da página qd usuário clicar em uma categoria ou fizer uma buscater
 $titulo_exibicao = "Nossos Produtos";
 
 if (isset($_GET['categoria'])) {
