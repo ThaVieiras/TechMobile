@@ -1,85 +1,62 @@
-/* ESTILOS GERAIS DO HEADER */
+/* Variáveis de Cores - Nexus Celulares (Opção B - Energia) */
+:root {
+    --nexus-purple: #240046;      /* Roxo Profundo (Base e Texto) */
+    --nexus-coral: #FF5733;       /* Coral Impulse (Destaque e Ação) */
+    --nexus-ametista: #9D4EDD;    /* Ametista (Secundária) */
+    --nexus-bg: #F8F9FA;          /* Fundo Gelo */
+    --text-main: #240046;
+}
+
+body {
+    background-color: var(--nexus-bg);
+    color: var(--text-main);
+    font-family: 'Poppins', sans-serif; /* Sugestão de fonte moderna e arredondada */
+}
+
+/* Header e Faixa Superior */
 .top-bar {
-    background-color: #0e409d !important; /* Força o azul que tá sumindo */
+    background-color: var(--nexus-purple) !important;
     color: white;
-    font-size: 13px;
-    padding: 8px 0;
-    letter-spacing: 1px;
+    font-weight: 500;
 }
 
 .nav-link-custom {
-    color: #1a1a1a;
-    text-decoration: none;
-    font-weight: 800;
-    font-size: 15px;
-    padding: 10px 15px;
+    color: var(--nexus-purple);
+    font-weight: 700;
     transition: 0.3s;
 }
 
 .nav-link-custom:hover {
-    color: #0056b3;
+    color: var(--nexus-coral);
+    text-decoration: underline;
 }
 
-.search-input {
-    border-radius: 5px;
-    background-color: #f1f3f4;
-    border: 1px solid #ddd;
-    padding: 10px 20px;
-}
-
-/* --- ESTILOS DOS CARDS (O QUE ADICIONAMOS ONTEM) --- */
-.transition { 
-    transition: all 0.3s ease; 
-}
-
-.hover-shadow:hover { 
-    transform: translateY(-5px); 
-    box-shadow: 0 10px 20px rgba(0,0,0,0.12) !important; 
-}
-
-.btn-primary-custom { 
-    background-color: #0d6efd; 
-    border: none; 
-    border-radius: 50px; 
-    font-weight: 600;
-    transition: 0.3s;
-}
-
-.btn-primary-custom:hover { 
-    background-color: #0a58ca; 
-}
-
-.btn-outline-custom {
+/* Botões de Ação Profissionais (CTA) */
+.btn-primary-custom {
+    background-color: var(--nexus-coral) !important;
+    border: none;
     border-radius: 50px;
-    font-weight: 600;
-    border-width: 2px;
+    font-weight: 700;
+    color: white !important;
+    transition: 0.3s ease-in-out;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
-/* Efeito de elevação nos cards da TechMobile */
-.transition { transition: all 0.3s ease; }
-
-.hover-shadow:hover { 
-    transform: translateY(-5px); 
-    box-shadow: 0 10px 20px rgba(0,0,0,0.12) !important; 
+.btn-primary-custom:hover {
+    background-color: #e04b2b !important; /* Tom mais escuro de Coral */
+    transform: scale(1.05) translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 87, 51, 0.4) !important;
 }
 
-.btn-primary { 
-    background-color: #0056b3; 
-    border: none; 
-    border-radius: 50px; /* Deixa os botões arredondados, estilo moderno */
+/* Cards de Produtos - Efeito Moderno */
+.hover-shadow:hover {
+    border: 1px solid var(--nexus-coral) !important;
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px rgba(255, 87, 51, 0.15) !important;
 }
 
-.btn-primary:hover { 
-    background-color: #004494; 
-}
-
-.extra-small { 
-    font-size: 0.7rem; 
-}
-.hover-blue:hover { 
-    color: #0e409d !important; 
-    text-decoration: underline !important; 
-}
-.lh-sm { 
-    line-height: 1.2 !important; 
+/* Links e Detalhes Secundários */
+.user-menu a.text-muted:hover {
+    color: var(--nexus-ametista) !important;
 }
