@@ -1,8 +1,9 @@
 <style>
     /* Trava a altura de todos os slides para serem idênticos */
     .nexus-item {
-        height: 450px; /* Altura fixa para todos */
-        border-radius: 15px;
+        height: 450px;
+        /* Altura fixa para todos */
+        border-radius: 0px;
         display: flex;
         align-items: center;
         overflow: hidden;
@@ -29,6 +30,7 @@
         border-radius: 50px;
         transition: 0.3s;
     }
+
 </style>
 
 <div id="nexusHomeCarousel" class="carousel slide" data-bs-ride="carousel">
@@ -41,6 +43,7 @@
     <div class="carousel-inner">
         <div class="carousel-item active">
             <div class="nexus-item p-5" style="background: linear-gradient(135deg, #240046 0%, #1a0035 60%, #FF5733 100%);">
+                
                 <div class="row w-100 align-items-center">
                     <div class="col-md-6 nexus-img-container">
                         <img src="assets/img/iphone17-pro.png" alt="Lançamento">

@@ -27,7 +27,7 @@
                     <li class="mb-2"><a href="#" class="text-decoration-none text-muted"><i class="fa-solid fa-circle-question me-2 text-nexus"></i>Fale Conosco</a></li>
                     <li class="mb-2"><a href="#" class="text-decoration-none text-muted"><i class="fa-solid fa-truck-fast me-2 text-nexus"></i>Rastrear Pedido</a></li>
                     <li class="mb-2"><a href="#" class="text-decoration-none text-muted"><i class="fa-solid fa-arrows-rotate me-2 text-nexus"></i> Trocas e Devoluções</a></li>
-                    <li class="mb-2"><a href="#" class="text-decoration-none text-muted"><i class="fa-solid fa-shield-halved me-2 text-nexus"></i> Política de Privacidade</a></li>
+                    <li class="mb-2"><a href="#" class="text-decoration-none text-muted"><i class="fa-solid fa-file-contract me-2  text-nexus"></i> Política de Privacidade</a></li>
                     <li class="mb-2"><a href="#" class="text-decoration-none text-muted"><i class="fa-solid fa-file-contract me-2 text-nexus"></i> Termo de Uso</a></li>
                 </ul>
             </div>

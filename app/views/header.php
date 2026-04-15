@@ -1,72 +1,119 @@
-<header class="py-2 bg-white border-bottom sticky-top shadow-sm">
-    <div class="container-fluid px-lg-5">
-        <div class="row align-items-center g-0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<header class="p-3 bg-dark text-white sticky-top shadow-sm">
+    <div class="container-fluid">
+        <div class="d-flex align-items-center justify-content-between">
             
-            <div class="col-md-3 d-flex align-items-center gap-3">
-                <div class="dropdown">
-                    <button class="btn btn-link text-nexus text-decoration-none d-flex align-items-center gap-2 fw-bold p-0" 
-                            type="button" data-bs-toggle="dropdown" style="font-size: 0.75rem;">
-                        <i class="fa-solid fa-bars fa-lg"></i> <span class="d-none d-lg-inline">MENU</span>
-                    </button>
-                    <ul class="dropdown-menu shadow border-0 mt-3 rounded-3 py-3" style="min-width: 250px;">
-                        <li><a class="dropdown-item py-2" href="produtos.php?cat=smartphone"><i class="fa-solid fa-mobile-screen-button me-2 opacity-50"></i> Smartphones</a></li>
-                        <li><a class="dropdown-item py-2" href="produtos.php?cat=apple"><i class="fa-brands fa-apple me-2 opacity-50"></i> Apple</a></li>
-                        <li><a class="dropdown-item py-2" href="produtos.php?tipo=smartwatch"><i class="fa-brands fa-apple me-2 opacity-50"></i> Smartwatches</a></li>
-                        <li><a class="dropdown-item py-2" href="produtos.php?tipo=tab"><i class="fa-brands fa-apple me-2 opacity-50"></i> Tablets</a></li>
-                        <li><a class="dropdown-item py-2" href="produtos.php?tipo=cabo"><i class="fa-brands fa-apple me-2 opacity-50"></i> Cabos e Carregadores</a></li>
-                        <li><a class="dropdown-item py-2" href="produtos.php?tipo=buds"><i class="fa-brands fa-apple me-2 opacity-50"></i> Fones de Ouvido</a></li>
-                        <li><a class="dropdown-item py-2" href="produtos.php?cat=acessorios"><i class="fa-solid fa-headphones me-2 opacity-50"></i> Acessórios</a></li>
-                        <li><a class="dropdown-item py-2" href="produtos.php?cat=recondicionados"><i class="fa-solid fa-recycle me-2 opacity-50"></i> Recondicionados</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item py-2 text-danger fw-bold" href="produtos.php?cat=ofertas"><i class="fa-solid fa-fire me-2"></i> Ofertas</a></li>
-                    </ul>
-                </div>
+            <div class="d-flex align-items-center">
+                <button class="btn text-white border-0 d-flex align-items-center gap-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuLateralNexus">
+                    <i class="fa-solid fa-bars fs-4"></i>
+                    <span class="d-none d-md-block fw-bold">MENU</span>
+                </button>
 
-                <a href="index.php">
-                    <img src="assets/img/NexusCelulares.png" alt="Nexus" style="width: 300px; height: 65px; object-fit: contain;">
+                <a href="index.php" class="ms-4">
+                    <img src="assets/img/logo.png" alt="Nexus Arena" height="35" onerror="this.src='https://via.placeholder.com/120x35?text=NEXUS+ARENA'">
                 </a>
             </div>
 
-            <div class="col-md-5">
-                <form action="produtos.php" method="GET" class="position-relative">
-                    <input type="text" name="busca" class="form-control border-0 rounded-pill ps-4" 
-                           placeholder="O que deseja?" 
-                           style="height: 36px; background-color: #f2f2f2; font-size: 0.85rem;">
-                    <button class="btn position-absolute end-0 top-50 translate-middle-y me-2 border-0" type="submit">
-                        <i class="fa-solid fa-magnifying-glass text-muted" style="font-size: 0.8rem;"></i>
+            <div class="flex-grow-1 mx-4" style="max-width: 600px;">
+                <div class="input-group position-relative">
+                    <input type="search" class="form-control rounded-pill ps-4" placeholder="O que deseja hoje?">
+                    <button class="btn position-absolute end-0 top-50 translate-middle-y border-0 bg-transparent pe-3" style="z-index: 5;">
+                        <i class="fa-solid fa-magnifying-glass text-muted"></i>
                     </button>
-                </form>
+                </div>
             </div>
 
-            <div class="col-md-4 d-flex align-items-center justify-content-end gap-3 gap-lg-4">
+            <div class="d-flex align-items-center gap-4">
                 
-                <div class="d-none d-xl-block text-muted text-end border-end pe-3" style="line-height: 1;">
-                    <a href="#" class="text-decoration-none text-muted" style="font-size: 0.7rem;">
-                        <i class="fa-solid fa-location-dot me-1"></i> Informe seu CEP <i class="fa-solid fa-chevron-down ms-1" style="font-size: 0.5rem;"></i>
-                    </a>
+                <div class="dropdown d-none d-lg-block">
+                    <span class="small cursor-pointer d-flex align-items-center gap-2" data-bs-toggle="dropdown" aria-expanded="false" style="cursor: pointer;">
+                        <i class="fa-solid fa-location-dot text-primary"></i>
+                        <span id="cepTexto">Informe seu CEP</span>
+                    </span>
+                    <div class="dropdown-menu p-3 shadow-lg" style="width: 250px;">
+                        <p class="small text-muted mb-2">Digite seu CEP para frete:</p>
+                        <div class="input-group">
+                            <input type="text" id="inputCep" class="form-control" placeholder="00000-000">
+                            <button class="btn btn-dark" onclick="salvarCEP()">OK</button>
+                        </div>
+                    </div>
                 </div>
 
-                <a href="#" class="text-dark action-icon" id="userDropdown" data-bs-toggle="dropdown">
-                    <i class="fa-regular fa-circle-user fa-xl"></i>
-                </a>
-
-                <a href="carrinho.php" class="text-dark action-icon position-relative">
-                    <i class="fa-solid fa-bag-shopping fa-xl"></i>
-                    <?php if (!empty($_SESSION['carrinho'])): ?>
-                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger border border-white" style="font-size: 0.5rem;">
-                            <?php echo array_sum($_SESSION['carrinho']); ?>
-                        </span>
-                    <?php endif; ?>
-                </a>
-
-                <a href="#" class="text-dark action-icon">
-                    <i class="fa-solid fa-headset fa-xl"></i>
-                </a>
+                <div class="d-flex align-items-center gap-3">
+                    <a href="#" class="text-white" title="Minha Conta"><i class="fa-regular fa-user fs-5"></i></a>
+                    <a href="#" class="text-white" title="Favoritos"><i class="fa-regular fa-heart fs-5"></i></a>
+                    <a href="carrinho.php" class="text-white position-relative">
+                        <i class="fa-solid fa-bag-shopping fs-5"></i>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.6rem;">0</span>
+                    </a>
+                    <a href="contato.php" class="text-white"><i class="fa-solid fa-headset fs-5"></i></a>
+                </div>
             </div>
-
         </div>
     </div>
 </header>
+
+<div class="offcanvas offcanvas-start bg-dark text-white" tabindex="-1" id="menuLateralNexus" aria-labelledby="labelMenu">
+  <div class="offcanvas-header border-bottom border-secondary">
+    <h5 class="offcanvas-title" id="labelMenu">NEXUS Celulares</h5>
+    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <ul class="list-unstyled fw-bold fs-5">
+        <li class="mb-3">
+            <a href="produtos.php?categoria=smartphone" class="text-white text-decoration-none d-flex align-items-center gap-3">
+                <i class="fa-solid fa-mobile-screen-button"></i> Smartphones
+            </a>
+        </li>
+        
+        <li class="mb-3">
+            <a href="produtos.php?cat=apple" class="text-white text-decoration-none d-flex align-items-center gap-3">
+                <i class="fa-brands fa-apple"></i> Apple
+            </a>
+        </li>
+        
+        <li class="mb-3">
+            <a href="produtos.php?categoria=acessorios" class="text-white text-decoration-none d-flex align-items-center gap-3">
+                <i class="fa-solid fa-plug"></i> Acessórios
+            </a>
+        </li>
+        
+        <li class="mb-3">
+            <a href="produtos.php?categoria=recondicionado" class="text-white text-decoration-none d-flex align-items-center gap-3">
+                <i class="fa-solid fa-arrows-rotate"></i> Recondicionados
+            </a>
+        </li>
+
+        <li class="mb-3">
+            <a href="produtos.php?categoria=oferta" class="text-white text-decoration-none d-flex align-items-center gap-3 text-warning">
+                <i class="fa-solid fa-tag"></i> Ofertas especiais
+            </a>
+        </li>
+        
+        <hr class="border-secondary">
+        
+        <li class="mb-3">
+            <a href="contato.php" class="text-white text-decoration-none d-flex align-items-center gap-3">
+                <i class="fa-solid fa-headset"></i> Fale Conosco
+            </a>
+        </li>
+    </ul>
+</div>
+</div>
+
+<script>
+// Função para o CEP funcionar sem banco de dados por enquanto
+function salvarCEP() {
+    const cep = document.getElementById('inputCep').value;
+    if(cep.length >= 8) {
+        document.getElementById('cepTexto').innerText = "CEP: " + cep;
+        // Fecha o dropdown manualmente se desejar
+    } else {
+        alert("Digite um CEP válido");
+    }
+}
+</script>
 
 <!--<nav class="bg-white border-bottom py-2 shadow-sm d-none d-md-block">
     <div class="container d-flex justify-content-center gap-5">

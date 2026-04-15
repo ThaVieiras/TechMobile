@@ -11,7 +11,7 @@ $tipo      = $_GET['tipo'] ?? null;
 if ($busca) {
     $stmt = $pdo->prepare("SELECT * FROM produtos WHERE ativo = 1 AND (nome LIKE ? OR descricao LIKE ?)");
     $stmt->execute(["%$busca%", "%$busca%"]);
-} 
+}
 // 2. SE FOR MARCA (Ex: Apple, Samsung, Huawei)
 elseif ($categoria == 'apple' || $categoria == 'samsung' || $categoria == 'huawei') {
     $stmt = $pdo->prepare("SELECT * FROM produtos WHERE ativo = 1 AND marca = ?");
@@ -64,7 +64,7 @@ if ($tipo) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <title>Nexus Celulares - Sua conexão, sua energia</title>
+    <title>NEXUS Celulares - Sua conexão, sua energia</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
@@ -85,11 +85,15 @@ if ($tipo) {
                     <div class="card h-100 border-0 shadow-sm transition hover-shadow">
 
                         <div class="p-4 d-flex align-items-center justify-content-center" style="height: 200px;">
-                            <img src="assets/img/<?php echo $p['imagem_url']; ?>"
+                            <?php
+                            // Verificamos se existe algo no banco, se não, definimos a imagem padrão
+                            $fotoProduto = (!empty($p['imagem_url'])) ? $p['imagem_url'] : 'sem-foto.png';
+                            ?>
+                            <img src="assets/img/<?php echo $header_img_path ?? ''; ?><?php echo $fotoProduto; ?>"
                                 class="img-fluid"
                                 alt="<?php echo $p['nome']; ?>"
                                 style="max-height: 100%;"
-                                onerror="this.src='assets/img/sem-foto.png'">
+                                onerror="this.src='assets/img/sem-foto.png';">
                         </div>
 
                         <div class="card-body d-flex flex-column text-center">
