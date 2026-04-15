@@ -1,47 +1,60 @@
 <?php
 session_start();
-// Sobe dois níveis (../..) para sair de public e web-php
 require_once __DIR__ . '/../../config/database.php';
 
-// Ações dos dados que vêm da URL (Header ou Menu)
-$categoria = $_GET['categoria'] ?? null;
-$busca = $_GET['busca'] ?? null;
+// Capturamos os parâmetros da URL
+$categoria = $_GET['categoria'] ?? $_GET['cat'] ?? null; // Aceita 'categoria' ou 'cat'
+$busca     = $_GET['busca'] ?? null;
+$tipo      = $_GET['tipo'] ?? null;
 
-// SE o usuário digitou algo na busca
+// 1. SE FOR BUSCA
 if ($busca) {
-    $stmt = $pdo->prepare("SELECT * FROM produtos WHERE ativo = 1 AND nome LIKE ?");
-    $stmt->execute(["%$busca%"]);
+    $stmt = $pdo->prepare("SELECT * FROM produtos WHERE ativo = 1 AND (nome LIKE ? OR descricao LIKE ?)");
+    $stmt->execute(["%$busca%", "%$busca%"]);
+} 
+// 2. SE FOR MARCA (Ex: Apple, Samsung, Huawei)
+elseif ($categoria == 'apple' || $categoria == 'samsung' || $categoria == 'huawei') {
+    $stmt = $pdo->prepare("SELECT * FROM produtos WHERE ativo = 1 AND marca = ?");
+    $stmt->execute([$categoria]);
 }
-// SE NÃO, se o usuário clicou em uma categoria
+// 3. SE FOR TIPO ESPECÍFICO (Filtro inteligente que já corrigimos)
+elseif ($tipo) {
+    if ($tipo == 'buds' || $tipo == 'fone') {
+        $stmt = $pdo->query("SELECT * FROM produtos WHERE ativo = 1 AND (nome LIKE '%buds%' OR nome LIKE '%airpods%' OR nome LIKE '%fone%')");
+    } elseif ($tipo == 'cabo') {
+        $stmt = $pdo->query("SELECT * FROM produtos WHERE ativo = 1 AND (nome LIKE '%cabo%' OR nome LIKE '%carregador%' OR nome LIKE '%magsafe%')");
+    } else {
+        $stmt = $pdo->prepare("SELECT * FROM produtos WHERE ativo = 1 AND (nome LIKE ? OR categoria = ?)");
+        $stmt->execute(["%$tipo%", $tipo]);
+    }
+}
+// 4. SE FOR CATEGORIA DO BANCO (smartphone, recondicionado, acessorios)
 elseif ($categoria) {
     $stmt = $pdo->prepare("SELECT * FROM produtos WHERE ativo = 1 AND categoria = ?");
     $stmt->execute([$categoria]);
 }
-// SE NÃO tiver busca nem categoria, mostra tudo
+// 5. PADRÃO: MOSTRA TUDO (Evita o Fatal Error)
 else {
     $stmt = $pdo->query("SELECT * FROM produtos WHERE ativo = 1");
 }
 
 $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-// Lógica para definir o título da página qd usuário clicar em uma categoria ou fizer uma buscater
+// --- LÓGICA DE TÍTULO DA PÁGINA ---
 $titulo_exibicao = "Nossos Produtos";
 
-if (isset($_GET['categoria'])) {
-    $cat = $_GET['categoria'];
-
-    // Mapeamento de nomes para exibição (Tratamento de Grafia)
+if ($tipo) {
+    $titulo_exibicao = ucfirst($tipo) . "s"; // Ex: Smartwatch -> Smartwatchs
+} elseif ($categoria) {
     $nomes_formatados = [
         'acessorios'     => 'Acessórios',
         'smartphone'     => 'Smartphones',
         'recondicionado' => 'Recondicionados',
         'oferta'         => 'Ofertas especiais'
     ];
-
-    // Se existir no mapa, usa o nome bonito. Se não, apenas capitaliza.
-    $titulo_exibicao = $nomes_formatados[$cat] ?? ucfirst($cat);
-} elseif (isset($_GET['busca'])) {
-    $titulo_exibicao = "Resultados para: " . htmlspecialchars($_GET['busca']);
+    $titulo_exibicao = $nomes_formatados[$categoria] ?? ucfirst($categoria);
+} elseif ($busca) {
+    $titulo_exibicao = "Resultados para: " . htmlspecialchars($busca);
 }
 ?>
 
@@ -51,7 +64,7 @@ if (isset($_GET['categoria'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Techmobile - Loja</title>
+     <title>Nexus Celulares - Sua conexão, sua energia</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 

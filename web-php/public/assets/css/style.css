@@ -60,3 +60,72 @@ body {
 .user-menu a.text-muted:hover {
     color: var(--nexus-ametista) !important;
 }
+
+/* CUSTOMIZAÇÃO NEXUS CELULARES */
+
+/* Todos os textos Roxo Nexus */
+.text-primary {
+    color: #240046 !important;
+}
+
+/* Altera os botões "Ver Detalhes" (outline) */
+.btn-outline-primary {
+    color: #240046 !important;
+    background-color: transparent !important;
+    border: 2px solid #240046 !important;
+    font-weight: 600;
+    border-color: #240046 !important;
+    border-radius: 50px !important; /* Estilo pílula para combinar com o logo */
+}
+
+.btn-outline-primary:hover {
+    background-color: #240046 !important;
+    border-color: #240046 !important;
+    color: #F8F9FA !important;
+}
+
+/* Botão 'COMPRAR' */
+.btn-primary {
+    background-color: #FF5733!important;
+    border-color: #240046 !important;
+    border-radius: 50px !important;
+    color: #F8F9FA !important;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn-primary:hover {
+    background-color: #E04B2B !important;
+    box-shadow: 0 4px 15px rgba(255, 87, 51, 0.4);
+}
+
+/* 3. Suavizando o Roxo do Preço */
+/* Tom levemente mais aberto que o #240046 para o texto */
+.text-primary {
+    color: #3c096c !important; /* Um roxo levemente mais vibrante e menos 'preto' */
+}
+
+/* Efeito de destaque no Card Neon */
+.card {
+    /* ... mantenha os estilos que você já tem (transition, etc.) ... */
+    transition: transform 0.3s ease, box-shadow 0.4s ease, border-color 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-8px); /* Eleva o card para destacar o neon */
+    
+    /* Múltiplas camadas de sombra para o efeito direcional */
+    box-shadow: 
+        /* 1. Neon Coral (Superior Esquerda) */
+        /* Deslocamento negativo (-8px, -8px) coloca a sombra para cima e para a esquerda */
+        -10px -10px 25px rgba(255, 87, 51, 0.5), 
+
+        /* 2. Neon Roxo (Inferior Direita) */
+        /* Deslocamento positivo (8px, 8px) coloca a sombra para baixo e para a direita */
+        10px 10px 25px rgba(70, 5, 123, 0.6) !important;
+
+    /* Borda muda para o Roxo Nexus para dar o contraste final */
+    border-color: #240046 !important; 
+    transition: all 0.4s ease-in-out;
+}

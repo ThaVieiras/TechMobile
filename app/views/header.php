@@ -1,58 +1,107 @@
-<div class="top-bar text-center">
-    Tecnologia a um clique de distância.
-</div>
+<header class="py-2 bg-white border-bottom sticky-top shadow-sm">
+    <div class="container-fluid px-lg-5">
+        <div class="row align-items-center g-0">
+            
+            <div class="col-md-3 d-flex align-items-center gap-3">
+                <div class="dropdown">
+                    <button class="btn btn-link text-nexus text-decoration-none d-flex align-items-center gap-2 fw-bold p-0" 
+                            type="button" data-bs-toggle="dropdown" style="font-size: 0.75rem;">
+                        <i class="fa-solid fa-bars fa-lg"></i> <span class="d-none d-lg-inline">MENU</span>
+                    </button>
+                    <ul class="dropdown-menu shadow border-0 mt-3 rounded-3 py-3" style="min-width: 250px;">
+                        <li><a class="dropdown-item py-2" href="produtos.php?cat=smartphone"><i class="fa-solid fa-mobile-screen-button me-2 opacity-50"></i> Smartphones</a></li>
+                        <li><a class="dropdown-item py-2" href="produtos.php?cat=apple"><i class="fa-brands fa-apple me-2 opacity-50"></i> Apple</a></li>
+                        <li><a class="dropdown-item py-2" href="produtos.php?tipo=smartwatch"><i class="fa-brands fa-apple me-2 opacity-50"></i> Smartwatches</a></li>
+                        <li><a class="dropdown-item py-2" href="produtos.php?tipo=tab"><i class="fa-brands fa-apple me-2 opacity-50"></i> Tablets</a></li>
+                        <li><a class="dropdown-item py-2" href="produtos.php?tipo=cabo"><i class="fa-brands fa-apple me-2 opacity-50"></i> Cabos e Carregadores</a></li>
+                        <li><a class="dropdown-item py-2" href="produtos.php?tipo=buds"><i class="fa-brands fa-apple me-2 opacity-50"></i> Fones de Ouvido</a></li>
+                        <li><a class="dropdown-item py-2" href="produtos.php?cat=acessorios"><i class="fa-solid fa-headphones me-2 opacity-50"></i> Acessórios</a></li>
+                        <li><a class="dropdown-item py-2" href="produtos.php?cat=recondicionados"><i class="fa-solid fa-recycle me-2 opacity-50"></i> Recondicionados</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item py-2 text-danger fw-bold" href="produtos.php?cat=ofertas"><i class="fa-solid fa-fire me-2"></i> Ofertas</a></li>
+                    </ul>
+                </div>
 
-<header class="bg-white border-bottom shadow-sm">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <div class="container py-3">
-        <div class="row align-items-center">
-            <div class="col-md-2">
                 <a href="index.php">
-                    <img src="assets/img/logoTechMobile.png" alt="TechMobile" height="55">
+                    <img src="assets/img/NexusCelulares.png" alt="Nexus" style="width: 300px; height: 65px; object-fit: contain;">
                 </a>
             </div>
 
-            <div class="col-md-6">
-                <form action="produtos.php" method="GET">
-                    <div class="input-group">
-                        <input type="text" name="busca" class="form-control search-input"
-                            placeholder="Buscar produtos por modelos"
-                            value="<?php echo $_GET['busca'] ?? ''; ?>">
-                        <button type="submit" class="btn btn-outline-secondary border-0 bg-light">🔍</button>
-                    </div>
+            <div class="col-md-5">
+                <form action="produtos.php" method="GET" class="position-relative">
+                    <input type="text" name="busca" class="form-control border-0 rounded-pill ps-4" 
+                           placeholder="O que deseja?" 
+                           style="height: 36px; background-color: #f2f2f2; font-size: 0.85rem;">
+                    <button class="btn position-absolute end-0 top-50 translate-middle-y me-2 border-0" type="submit">
+                        <i class="fa-solid fa-magnifying-glass text-muted" style="font-size: 0.8rem;"></i>
+                    </button>
                 </form>
             </div>
 
-            <div class="col-md-4 d-flex justify-content-end align-items-center gap-3">
-                <a href="#" class="text-decoration-none fs-5" title="Favoritos">❤️</a>
+            <div class="col-md-4 d-flex align-items-center justify-content-end gap-3 gap-lg-4">
+                
+                <div class="d-none d-xl-block text-muted text-end border-end pe-3" style="line-height: 1;">
+                    <a href="#" class="text-decoration-none text-muted" style="font-size: 0.7rem;">
+                        <i class="fa-solid fa-location-dot me-1"></i> Informe seu CEP <i class="fa-solid fa-chevron-down ms-1" style="font-size: 0.5rem;"></i>
+                    </a>
+                </div>
 
-                <a href="carrinho.php" class="text-secondary position-relative me-2">
-                    <span class="fs-4">🛒</span>
-                    <span class="badge bg-primary rounded-pill position-absolute top-0 start-100 translate-middle" style="font-size: 0.6rem;">
-                        <?php echo count($_SESSION['carrinho'] ?? []); ?>
-                    </span>
+                <a href="#" class="text-dark action-icon" id="userDropdown" data-bs-toggle="dropdown">
+                    <i class="fa-regular fa-circle-user fa-xl"></i>
                 </a>
 
-                <div class="vr mx-2 text-muted" style="height: 30px; opacity: 0.2;"></div>
-
-                <div class="user-menu d-flex flex-column lh-sm">
-                    <a href="contato.php" class="text-muted text-decoration-none small fw-bold hover-blue">Contato</a>
-                    <?php if (isset($_SESSION['cliente_nome'])): ?>
-                        <span class="small text-muted">Olá, <a href="minha_conta.php" class="text-primary fw-bold text-decoration-none"><?php echo explode(' ', $_SESSION['cliente_nome'])[0]; ?></a></span>
-                        <a href="limpar.php" class="text-danger extra-small text-decoration-none">Sair</a>
-                    <?php else: ?>
-                        <a href="login.php" class="text-dark text-decoration-none small fw-bold hover-blue">Minha Conta</a>
-                        <a href="cadastro.php" class="text-muted text-decoration-none extra-small">Cadastre-se</a>
+                <a href="carrinho.php" class="text-dark action-icon position-relative">
+                    <i class="fa-solid fa-bag-shopping fa-xl"></i>
+                    <?php if (!empty($_SESSION['carrinho'])): ?>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger border border-white" style="font-size: 0.5rem;">
+                            <?php echo array_sum($_SESSION['carrinho']); ?>
+                        </span>
                     <?php endif; ?>
-                </div>
-            </div>
-        </div>
+                </a>
 
-        <div class="d-flex justify-content-center gap-5 mt-3">
-            <a href="produtos.php?categoria=smartphone" class="nav-link-custom">SMARTPHONE</a>
-            <a href="produtos.php?categoria=acessorios" class="nav-link-custom">ACESSÓRIOS</a>
-            <a href="produtos.php?categoria=recondicionados" class="nav-link-custom">RECONDICIONADOS</a>
-            <a href="produtos.php?categoria=ofertas" class="nav-link-custom text-danger">OFERTAS</a>
+                <a href="#" class="text-dark action-icon">
+                    <i class="fa-solid fa-headset fa-xl"></i>
+                </a>
+            </div>
+
         </div>
     </div>
 </header>
+
+<!--<nav class="bg-white border-bottom py-2 shadow-sm d-none d-md-block">
+    <div class="container d-flex justify-content-center gap-5">
+        <a href="produtos.php?cat=smartphone" class="cat-link active">SMARTPHONES</a>
+        <a href="produtos.php?cat=apple" class="cat-link">APPLE</a>
+        <a href="produtos.php?cat=acessorios" class="cat-link">ACESSÓRIOS</a>
+        <a href="produtos.php?cat=recondicionados" class="cat-link text-muted">RECONDICIONADOS</a>
+        <a href="produtos.php?cat=ofertas" class="cat-link text-coral fw-bold">OFERTAS</a>
+    </div>
+</nav>-->
+
+<style>
+    /* Estética Nexus Arena */
+    .action-icon { transition: 0.2s ease-in-out; color: #333 !important; }
+    .action-icon:hover { color: #FF5733 !important; transform: translateY(-2px); }
+    
+    .cat-link {
+        text-decoration: none;
+        color: #333;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        transition: 0.2s;
+    }
+    .cat-link:hover { color: #FF5733; }
+    .cat-link.active { border-bottom: 2px solid #240046; padding-bottom: 2px; }
+    .text-coral { color: #FF5733 !important; }
+
+    /* Estilo do Dropdown para não ter seta */
+    .dropdown-toggle::after { display: none; }
+    
+    /* Input Search Focus */
+    .form-control:focus {
+        background-color: #fff !important;
+        box-shadow: 0 0 0 0.2rem rgba(36, 0, 70, 0.05);
+        border: 1px solid #ddd !important;
+    }
+</style>

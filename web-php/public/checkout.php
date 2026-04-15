@@ -2,7 +2,7 @@
 session_start();
 require_once __DIR__ . '/../../config/database.php';
 
-// 1 - Validação de Segurança
+// Validação de Segurança 
 if (empty($_SESSION['carrinho'])) {
     header("Location: produtos.php");
     exit;
@@ -13,14 +13,13 @@ if (!isset($_SESSION['cliente_id'])) {
     exit;
 }
 
-// Definindo variáveis que o SQL vai usar
 $id_cliente = $_SESSION['cliente_id'];
-$id_status_novo = 1; // ID 1 costuma ser 'Novo/Pendente' no banco
+$id_status_novo = 1; 
 
 try {
     $pdo->beginTransaction(); 
 
-    // 2 - Calcular total geral (RN-04)
+    // Calcular total (O preço vem do Banco, não da Sessão - Segurança!)
     $total_geral = 0;
     $ids = array_keys($_SESSION['carrinho']);
     $placeholders = str_repeat('?,', count($ids) - 1) . '?';
@@ -35,16 +34,16 @@ try {
         $total_geral += $p['preco'] * $_SESSION['carrinho'][$p['id_produto']];
     }
 
-    // 3 - Inserir Pedido (RF-W07)
-    // usando id_status_pedido conforme DER provável
+    // Inserir Pedido 
     $sqlPedido = "INSERT INTO pedidos (id_cliente, id_status, data_pedido, valor_total, atualizado_em) 
                   VALUES (?, ?, NOW(), ?, NOW())";
     $stmtPedido = $pdo->prepare($sqlPedido);
     $stmtPedido->execute([$id_cliente, $id_status_novo, $total_geral]);
     $id_pedido = $pdo->lastInsertId();
 
-    // 4 - Inserir Itens e Baixar Estoque
+    // Inserir Itens e Baixar Estoque
     $stmtItem = $pdo->prepare("INSERT INTO itens_pedidos (id_pedido, id_produto, quantidade, preco_unitario, subtotal) VALUES (?, ?, ?, ?, ?)");
+    // QA: A tabela de estoque usa id_produto
     $stmtEstoque = $pdo->prepare("UPDATE estoque SET quantidade_atual = quantidade_atual - ?, atualizado_em = NOW() WHERE id_produto = ?");
 
     foreach ($_SESSION['carrinho'] as $id_prod => $qtd) {
@@ -54,7 +53,7 @@ try {
     }
 
     $pdo->commit(); 
-    unset($_SESSION['carrinho']); // Carrinho limpo com sucesso!
+    unset($_SESSION['carrinho']); 
 
     // Redirecionamento para a página de sucesso 
     header("Location: sucesso.php?id=" . $id_pedido);
@@ -62,5 +61,18 @@ try {
 
 } catch (Exception $e) {
     $pdo->rollBack(); 
-    die("Erro Crítico no Checkout: " . $e->getMessage());
+    // Erro estilizado com as cores da Nexus
+    include __DIR__ . '/../../app/views/header.php';
+    echo "
+    <div class='container my-5 text-center'>
+        <div class='card border-0 shadow-lg p-5 rounded-4'>
+            <h1 class='display-1'>⚠️</h1>
+            <h2 style='color: #240046; font-weight: bold;'>Ops! Algo deu errado.</h2>
+            <p class='text-muted'>Não conseguimos processar sua energia agora. Por favor, tente novamente.</p>
+            <a href='carrinho.php' class='btn px-5 py-3 mt-3' style='background: #FF5733; color: white; border-radius: 50px; font-weight: bold;'>VOLTAR AO CARRINHO</a>
+            <p class='small text-danger mt-4'>Código do erro: " . $e->getMessage() . "</p>
+        </div>
+    </div>";
+    include __DIR__ . '/../../app/views/footer.php';
+    exit;
 }

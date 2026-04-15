@@ -2,11 +2,11 @@
 session_start();
 require_once __DIR__ . '/../../config/database.php';
 
-// 1 - Destaques da Semana (Conforme o Wireframe)
+// 1 - Destaques da Semana
 $stmt = $pdo->query("SELECT * FROM produtos WHERE ativo = 1 LIMIT 5");
 $produtos_destaque = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-// 2 - Mais Vendidos (Conforme o Wireframe)
+// 2 - Mais Vendidos
 $stmtMV = $pdo->query("SELECT * FROM produtos WHERE mais_vendido = 1 AND ativo = 1 LIMIT 5");
 $mais_vendidos = $stmtMV->fetchAll(PDO::FETCH_ASSOC);
 ?>
@@ -17,12 +17,21 @@ $mais_vendidos = $stmtMV->fetchAll(PDO::FETCH_ASSOC);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TechMobile - Tecnologia a um clique</title>
+    <title>Nexus Celulares - Sua conexão, sua energia</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700&display=swap" rel="stylesheet">
+    
     <style>
+        /* Estética Nexus */
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #F8F9FA;
+            color: #240046;
+        }
+
         .brand-logo {
             filter: grayscale(100%);
-            opacity: 0.5;
+            opacity: 0.6;
             transition: 0.3s;
             max-height: 40px;
         }
@@ -32,15 +41,41 @@ $mais_vendidos = $stmtMV->fetchAll(PDO::FETCH_ASSOC);
             opacity: 1;
         }
 
-        /* Arredondar o botão conforme o Wireframe */
+        /* Botão Nexus (Coral Impulse e Roxo) */
         .btn-add {
-            border-radius: 20px;
+            background-color: #FF5733 !important; /* Coral */
+            border: none;
+            color: white !important;
+            border-radius: 50px; /* Mais arredondado conforme nova identidade */
             font-weight: bold;
+            transition: 0.3s ease;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+        }
+
+        .btn-add:hover {
+            background-color: #E04B2B !important;
+            transform: scale(1.03);
+            box-shadow: 0 4px 12px rgba(255, 87, 51, 0.3);
+        }
+
+        .text-nexus {
+            color: #240046; /* Roxo */
+        }
+        
+        .card-nexus {
+            transition: 0.3s;
+            border-radius: 15px;
+        }
+        
+        .card-nexus:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(36, 0, 70, 0.1) !important;
         }
     </style>
 </head>
 
-<body class="bg-light">
+<body>
 
     <?php include __DIR__ . '/../../app/views/header.php'; ?>
 
@@ -50,14 +85,14 @@ $mais_vendidos = $stmtMV->fetchAll(PDO::FETCH_ASSOC);
 
     <main class="container my-5">
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2 class="fw-bold">Destaques da Semana</h2>
-            <a href="produtos.php" class="btn btn-outline-primary btn-sm">Ver todos</a>
+            <h2 class="fw-bold text-nexus">Destaques da Semana</h2>
+            <a href="produtos.php" class="btn btn-outline-dark btn-sm rounded-pill">Ver todos</a>
         </div>
 
         <div class="row row-cols-1 row-cols-md-3 row-cols-lg-5 g-4">
             <?php foreach ($produtos_destaque as $p): ?>
                 <div class="col">
-                    <div class="card h-100 shadow-sm border-0 text-center">
+                    <div class="card h-100 shadow-sm border-0 text-center card-nexus">
                         <a href="detalhe_produto.php?id=<?php echo $p['id_produto']; ?>">
                             <div class="d-flex align-items-center justify-content-center p-3" style="height: 180px;">
                                 <?php if (!empty($p['imagem_url'])): ?>
@@ -72,13 +107,13 @@ $mais_vendidos = $stmtMV->fetchAll(PDO::FETCH_ASSOC);
 
                         <div class="card-body">
                             <h6 class="card-title text-truncate small">
-                                <a href="detalhe_produto.php?id=<?php echo $p['id_produto']; ?>" class="text-decoration-none text-dark fw-bold">
+                                <a href="detalhe_produto.php?id=<?php echo $p['id_produto']; ?>" class="text-decoration-none text-nexus fw-bold">
                                     <?php echo $p['nome']; ?>
                                 </a>
                             </h6>
-                            <p class="card-text fw-bold text-primary">R$ <?php echo number_format($p['preco'], 2, ',', '.'); ?></p>
+                            <p class="card-text fw-bold text-nexus">R$ <?php echo number_format($p['preco'], 2, ',', '.'); ?></p>
 
-                            <a href="add.php?id=<?php echo $p['id_produto']; ?>" class="btn btn-primary btn-sm w-100 btn-add">Adicionar ao carrinho</a>
+                            <a href="add.php?id=<?php echo $p['id_produto']; ?>" class="btn btn-add w-100">Adicionar</a>
                         </div>
                     </div>
                 </div>
@@ -88,14 +123,14 @@ $mais_vendidos = $stmtMV->fetchAll(PDO::FETCH_ASSOC);
 
     <section class="container my-5 pt-5 border-top">
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2 class="fw-bold text-primary">Mais Vendidos</h2>
-            <a href="produtos.php" class="btn btn-link text-decoration-none">Ver todos</a>
+            <h2 class="fw-bold text-nexus">Mais Vendidos</h2>
+            <a href="produtos.php" class="btn btn-link text-nexus text-decoration-none fw-bold">Ver todos</a>
         </div>
 
         <div class="row row-cols-1 row-cols-md-3 row-cols-lg-5 g-4">
             <?php foreach ($mais_vendidos as $mv): ?>
                 <div class="col">
-                    <div class="card h-100 border-0 bg-transparent text-center">
+                    <div class="card h-100 border-0 bg-transparent text-center card-nexus">
                         <a href="detalhe_produto.php?id=<?php echo $mv['id_produto']; ?>">
                             <div class="d-flex align-items-center justify-content-center mb-2" style="height: 180px;">
                                 <?php if (!empty($mv['imagem_url'])): ?>
@@ -110,13 +145,13 @@ $mais_vendidos = $stmtMV->fetchAll(PDO::FETCH_ASSOC);
 
                         <div class="card-body p-2">
                             <h6 class="text-truncate small mb-1">
-                                <a href="detalhe_produto.php?id=<?php echo $mv['id_produto']; ?>" class="text-decoration-none text-dark">
+                                <a href="detalhe_produto.php?id=<?php echo $mv['id_produto']; ?>" class="text-decoration-none text-nexus">
                                     <?php echo $mv['nome']; ?>
                                 </a>
                             </h6>
-                            <p class="fw-bold mb-1">R$ <?php echo number_format($mv['preco'], 2, ',', '.'); ?></p>
+                            <p class="fw-bold mb-1 text-nexus">R$ <?php echo number_format($mv['preco'], 2, ',', '.'); ?></p>
                             <p class="text-muted small" style="font-size: 11px;">Até 12x sem juros</p>
-                            <a href="add.php?id=<?php echo $mv['id_produto']; ?>" class="btn btn-primary btn-sm w-100 btn-add">Adicionar ao carrinho</a>
+                            <a href="add.php?id=<?php echo $mv['id_produto']; ?>" class="btn btn-add w-100">Adicionar</a>
                         </div>
                     </div>
                 </div>
@@ -125,7 +160,7 @@ $mais_vendidos = $stmtMV->fetchAll(PDO::FETCH_ASSOC);
     </section>
 
     <section class="container my-5 py-5 border-top">
-        <h4 class="text-center fw-bold mb-5">Compre por marcas</h4>
+        <h4 class="text-center fw-bold text-nexus mb-5">As melhores marcas estão aqui</h4>
         <div class="row justify-content-center align-items-center g-5 text-center">
             <div class="col-4 col-md-2"><a href="produtos.php?busca=Apple"><img src="assets/img/logo-apple.png" class="brand-logo img-fluid"></a></div>
             <div class="col-4 col-md-2"><a href="produtos.php?busca=Samsung"><img src="assets/img/logo-samsung.png" class="brand-logo img-fluid"></a></div>
