@@ -1,85 +1,331 @@
-/* ESTILOS GERAIS DO HEADER */
-.top-bar {
-    background-color: #0e409d !important; /* Força o azul que tá sumindo */
-    color: white;
-    font-size: 13px;
-    padding: 8px 0;
+/* TechMobile - STYLE GUIDE CENTRAL 
+    Versão: 2.3 - Identidade Royal Purple & Cyber Gold (Correção de Header)
+    Sua conexão, sua energia.
+*/
+
+:root {
+    /* Paleta de Cores Oficial */
+    --techmobile-dark: #3D0066;        /* Roxo Super Profundo (Títulos/Preços) */
+    --techmobile-primary: #5C0099;     /* Púrpura Médio */
+    --techmobile-secondary: #FDC500;   /* Amarelo Gold (Botões de Ação) */
+    --techmobile-light: #FFD500;       /* Amarelo Brilhante (Hover) */
+    
+    --techmobile-bg-light: #ffffff;
+    --techmobile-gray-text: #4b5563;
+    --plus-jakarta: 'Plus Jakarta Sans', sans-serif;
+}
+
+body {
+    font-family: var(--plus-jakarta);
+    background-color: var(--techmobile-bg-light);
+    color: #111827;
+}
+
+/* --- UTILITÁRIOS DE CORES --- */
+.text-techmobile { color: var(--techmobile-dark) !important; }
+.text-gold { color: var(--techmobile-secondary) !important; }
+.bg-techmobile { background-color: var(--techmobile-dark) !important; }
+.bg-gold { background-color: var(--techmobile-secondary) !important; }
+
+/* --- BOTÕES PADRONIZADOS --- */
+/* Botão Principal (Comprar / Adicionar) */
+.btn-techmobile, .btn-add { 
+    background-color: var(--techmobile-secondary) !important; 
+    color: var(--techmobile-dark) !important; 
+    border: none; 
+    border-radius: 50px; 
+    font-weight: 800;
+    transition: all 0.3s ease;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+}
+
+.btn-techmobile:hover, .btn-add:hover { 
+    background-color: var(--techmobile-light) !important; 
+    transform: scale(1.05);
+    box-shadow: 0 8px 15px rgba(253, 197, 0, 0.4);
+}
+
+/* Botão Secundário (Ver Detalhes) */
+.btn-outline-techmobile { 
+    border: 2px solid var(--techmobile-dark) !important; 
+    color: var(--techmobile-dark) !important; 
+    background: transparent;
+    border-radius: 50px;
+    font-weight: 700;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-techmobile:hover { 
+    background-color: var(--techmobile-dark) !important; 
+    color: white !important; 
+}
+
+/* --- LOGOTIPOS DE PARCEIROS (Efeito Grayscale) --- */
+.brand-logo, .grayscale-logos img {
+    filter: grayscale(100%);
+    opacity: 0.6;
+    transition: 0.3s ease;
+    max-height: 40px;
+}
+
+.brand-logo:hover, .grayscale-logos img:hover {
+    filter: grayscale(0%);
+    opacity: 1;
+}
+
+/* --- CARDS DE PRODUTO --- */
+.card-produto, .card-techmobile {
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border-radius: 20px !important;
+    border: 1px solid #f3f4f6 !important;
+    overflow: hidden;
+    background: white;
+    position: relative;
+}
+
+/* Efeito Neon Direcional (Ouro no topo e Roxo na base) */
+.card-produto:hover, .card-techmobile:hover { 
+    transform: translateY(-10px); 
+    border-color: transparent !important;
+    box-shadow: 
+        -8px -8px 25px rgba(253, 197, 0, 0.25), /* Gold topo esquerda */
+         8px  8px 25px rgba(61, 0, 102, 0.2)    /* Roxo Profundo base direita */
+        !important; 
+}
+
+.price-tag {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: var(--techmobile-dark);
+}
+
+/* Alinha os cards da última linha à esquerda sem esticá-los */
+.row-cols-lg-5 {
+    justify-content: flex-start;
+}
+
+/* HEADER */
+/* Força o fundo escuro no cabeçalho principal */
+.header-techmobile {
+    background-color: #5C0099 !important;
+    padding: 15px 0;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.top-bar-techmobile {
+    background-color: #1a1a1a;
+    color: var(--techmobile-secondary);
+    font-size: 11px;
+    padding: 5px 0;
+    font-weight: 700;
+    text-transform: uppercase;
     letter-spacing: 1px;
 }
 
-.nav-link-custom {
-    color: #1a1a1a;
+/* Barra de Pesquisa Estilizada */
+.search-input-techmobile {
+    border-radius: 50px !important;
+    background-color: rgba(255, 255, 255, 0.1) !important; /* Semi-transparente para o Roxo */
+    border: 1px solid rgba(253, 197, 0, 0.3) !important;
+    padding: 10px 25px !important;
+    color: white !important;
+    transition: all 0.3s;
+}
+
+.search-input-techmobile::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.search-input-techmobile:focus {
+    background-color: white !important;
+    color: var(--techmobile-dark) !important;
+    border-color: var(--techmobile-secondary) !important;
+    box-shadow: 0 0 15px rgba(253, 197, 0, 0.4) !important;
+}
+
+/* Ícones e Links do Header */
+.nav-link-techmobile {
+    color: white !important;
+    font-weight: 600;
+    font-size: 14px;
     text-decoration: none;
-    font-weight: 800;
-    font-size: 15px;
-    padding: 10px 15px;
     transition: 0.3s;
 }
 
-.nav-link-custom:hover {
-    color: #0056b3;
+.nav-link-techmobile:hover {
+    color: var(--techmobile-secondary) !important;
 }
 
-.search-input {
-    border-radius: 5px;
-    background-color: #f1f3f4;
-    border: 1px solid #ddd;
-    padding: 10px 20px;
-}
-
-/* --- ESTILOS DOS CARDS (O QUE ADICIONAMOS ONTEM) --- */
-.transition { 
-    transition: all 0.3s ease; 
-}
-
-.hover-shadow:hover { 
-    transform: translateY(-5px); 
-    box-shadow: 0 10px 20px rgba(0,0,0,0.12) !important; 
-}
-
-.btn-primary-custom { 
-    background-color: #0d6efd; 
-    border: none; 
-    border-radius: 50px; 
-    font-weight: 600;
+.nav-icon-techmobile {
+    color: var(--techmobile-secondary) !important;
+    font-size: 1.2rem;
     transition: 0.3s;
 }
 
-.btn-primary-custom:hover { 
-    background-color: #0a58ca; 
+.nav-icon-techmobile:hover {
+    transform: scale(1.2);
+    filter: drop-shadow(0 0 5px var(--techmobile-secondary));
 }
 
-.btn-outline-custom {
+/* --- ESTILOS EXCLUSIVOS LANDING PAGE (Lançamento) --- */
+.floating-animation {
+    animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-25px); }
+    100% { transform: translateY(0px); }
+}
+
+/* Logo no header */
+.logo-header {
+    max-height: 135px;
+    width: auto;
+    display: block;
+}
+
+/* Logo no footer */
+.logo-footer {
+    max-height: 200px;
+    width: auto;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.bg-gradient-techmobile {
+    background: linear-gradient(135deg, #1a1a1a 0%, var(--techmobile-dark) 100%);
+}
+
+.btn-techmobile-buy {
+    background-color: white;
+    color: var(--techmobile-dark);
+    border: none;
     border-radius: 50px;
-    font-weight: 600;
-    border-width: 2px;
+    transition: all 0.4s ease;
+    font-weight: 800;
+    text-transform: uppercase;
+    padding: 12px 30px;
 }
 
-/* Efeito de elevação nos cards da TechMobile */
-.transition { transition: all 0.3s ease; }
-
-.hover-shadow:hover { 
-    transform: translateY(-5px); 
-    box-shadow: 0 10px 20px rgba(0,0,0,0.12) !important; 
+.btn-techmobile-buy:hover {
+    background-color: var(--techmobile-secondary) !important;
+    color: var(--techmobile-dark) !important;
+    transform: scale(1.1);
+    box-shadow: 0 10px 25px rgba(253, 197, 0, 0.5);
 }
 
-.btn-primary { 
-    background-color: #0056b3; 
-    border: none; 
-    border-radius: 50px; /* Deixa os botões arredondados, estilo moderno */
+/* Botão de compra nas landing pages */
+.btn-techmobile-buy {
+    background-color: white;
+    color: var(--techmobile-dark);
+    border: none;
+    border-radius: 50px;
+    transition: all 0.4s ease;
+    font-weight: 800;
+    text-transform: uppercase;
 }
 
-.btn-primary:hover { 
-    background-color: #004494; 
+.btn-techmobile-buy:hover {
+    background-color: var(--techmobile-secondary) !important;
+    color: var(--techmobile-dark) !important;
+    transform: scale(1.1);
+    box-shadow: 0 10px 25px rgba(253, 197, 0, 0.5);
 }
 
-.extra-small { 
-    font-size: 0.7rem; 
+/* --- FOOTER --- */
+.footer-nexus {
+    background: linear-gradient(160deg, #1a1a1a 0%, #240046 100%);
+    color: rgba(255,255,255,0.75);
+    padding: 60px 0 0;
+    margin-top: 80px;
 }
-.hover-blue:hover { 
-    color: #0e409d !important; 
-    text-decoration: underline !important; 
+
+.footer-nexus h5 {
+    color: var(--techmobile-secondary);
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 18px;
 }
-.lh-sm { 
-    line-height: 1.2 !important; 
+
+.footer-nexus ul a {
+    color: rgba(255,255,255,0.6);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: 0.3s;
+}
+
+.footer-nexus ul a:hover {
+    color: var(--techmobile-secondary);
+    padding-left: 5px;
+}
+
+.footer-bottom {
+    background-color: rgba(0,0,0,0.3);
+    border-top: 1px solid rgba(253,197,0,0.15);
+    margin-top: 40px;
+    padding: 20px 0;
+    color: rgba(255,255,255,0.4);
+    font-size: 0.8rem;
+}
+
+.icon-gold {
+    color: var(--techmobile-secondary);
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.icon-gold:hover {
+    color: var(--techmobile-light);
+    filter: drop-shadow(0 0 6px var(--techmobile-secondary));
+}
+
+/* --- UTILITÁRIOS GERAIS --- */
+.extra-small {
+    font-size: 0.72rem;
+}
+
+/* Wrapper de imagem nos cards (substitui height: 180px inline) */
+.card-img-wrapper {
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    background-color: #fdfdfd;
+}
+
+/* Badge do carrinho no header */
+.badge-cart {
+    font-size: 0.6rem;
+}
+
+/* Imagem na página de detalhe do produto */
+.produto-img-detail {
+    max-height: 450px;
+    object-fit: contain;
+}
+
+/* Preço na página de detalhe */
+.preco-detalhe {
+    color: var(--techmobile-dark);
+    font-size: 1.75rem;
+    font-weight: 800;
+}
+
+/* Divider vertical no header */
+.vr-header {
+    height: 30px;
+    opacity: 0.3;
+}
+
+/* --- RESPONSIVIDADE --- */
+@media (max-width: 768px) {
+    .row-cols-md-5 {
+        row-gap: 28px;
+    }
 }
