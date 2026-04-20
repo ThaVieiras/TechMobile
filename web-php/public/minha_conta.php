@@ -34,96 +34,54 @@ $cliente = $stmt->fetch(PDO::FETCH_ASSOC);
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meus Dados - Nexus Celulares</title>
+    <title>Minha Conta - TechMobile</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700&display=swap" rel="stylesheet">
-    
-    <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8f9fa; color: #240046; }
-        .text-nexus { color: #240046; }
-        
-        /* Menu Lateral Padronizado */
-        .list-group-item.active { 
-            background-color: #240046 !important; 
-            border-color: #240046 !important; 
-        }
-        .card-nexus { 
-            border-radius: 15px; 
-            border: none; 
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08); 
-        }
-
-        /* Inputs e Botões */
-        .form-control { border-radius: 10px; padding: 12px; border: 1px solid #ddd; }
-        .form-control:focus { border-color: #240046; box-shadow: 0 0 0 0.25 mil rgba(36, 0, 70, 0.1); }
-        
-        .btn-nexus-save { 
-            background-color: #FF5733 !important; 
-            color: white !important; 
-            border-radius: 50px; 
-            padding: 12px 30px; 
-            font-weight: bold; 
-            border: none;
-            transition: 0.3s;
-        }
-        .btn-nexus-save:hover { background-color: #E04B2B !important; transform: translateY(-2px); }
-    </style>
 </head>
-<body>
+<body class="bg-light">
 
     <?php include __DIR__ . '/../../app/views/header.php'; ?>
 
     <main class="container my-5">
         <div class="row">
-            <div class="col-md-3 mb-4">
-                <div class="list-group shadow-sm border-0 rounded-4 overflow-hidden text-start">
-                    <a href="minha_conta.php" class="list-group-item list-group-item-action active py-3">
-                        <i class="fa-solid fa-user-gear me-2 text-white"></i> Meus Dados
-                    </a>
-                    <a href="meus_pedidos.php" class="list-group-item list-group-item-action py-3">
-                        <i class="fa-solid fa-box-open me-2 text-nexus"></i> Meus Pedidos
-                    </a>
-                    <a href="limpar.php" class="list-group-item list-group-item-action py-3 text-danger fw-bold">
-                        <i class="fa-solid fa-power-off me-2"></i> Sair
-                    </a>
+            <div class="col-md-3">
+                <div class="list-group shadow-sm">
+                    <a href="minha_conta.php" class="list-group-item list-group-item-action active">Meus Dados</a>
+                    <a href="meus_pedidos.php" class="list-group-item list-group-item-action">Meus Pedidos</a>
+                    <a href="limpar.php" class="list-group-item list-group-item-action text-danger">Sair</a>
                 </div>
             </div>
 
-            <div class="col-md-9 text-start">
-                <div class="card card-nexus p-4 bg-white">
-                    <h2 class="fw-bold mb-4 text-nexus">Meus Dados</h2>
+            <div class="col-md-9">
+                <div class="bg-white p-4 shadow-sm rounded">
+                    <h2 class="fw-bold mb-4">Meus Dados</h2>
                     
-                    <form action="atualizar_dados.php" method="POST">
+                    <form action="atualizar_perfil.php" method="POST">
                         <div class="row g-3">
                             <div class="col-md-6">
-                                <label class="form-label small fw-bold text-muted">Nome Completo</label>
-                                <input type="text" class="form-control bg-light" value="Teste" readonly>
+                                <label class="form-label">Nome Completo</label>
+                                <input type="text" class="form-control" value="<?php echo $cliente['nome']; ?>" disabled>
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label small fw-bold text-muted">E-mail</label>
-                                <input type="email" class="form-control bg-light" value="teste@teste.com" readonly>
+                                <label class="form-label">E-mail</label>
+                                <input type="email" class="form-control" value="<?php echo $cliente['email']; ?>" disabled>
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label small fw-bold text-muted">Telefone</label>
-                                <input type="text" name="telefone" class="form-control" value="1140028922">
+                                <label class="form-label">Telefone</label>
+                                <input type="text" name="telefone" class="form-control" value="<?php echo $cliente['telefone'] ?? ''; ?>">
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label small fw-bold text-muted">CPF</label>
-                                <input type="text" class="form-control bg-light" value="000.000.000-00" readonly>
+                                <label class="form-label">CPF</label>
+                                <input type="text" class="form-control" value="<?php echo $cliente['cpf'] ?? ''; ?>" disabled>
                             </div>
                             
-                            <div class="col-12 mt-4">
-                                <h4 class="fw-bold text-nexus mb-3">Endereço de Entrega</h4>
-                                <label class="form-label small fw-bold text-muted">Endereço Completo (Rua, nº, Bairro)</label>
-                                <textarea name="endereco" class="form-control" rows="3" placeholder="Ex: Rua das Flores, 123 - Itaquera"></textarea>
+                            <h4 class="mt-4">Endereço de Entrega</h4>
+                            <div class="col-12">
+                                <label class="form-label">Endereço Completo (Rua, nº, Bairro)</label>
+                                <textarea name="endereco" class="form-control" rows="2" placeholder="Ex: Rua das Flores, 123 - Itaquera"></textarea>
                             </div>
 
                             <div class="col-12 mt-4">
-                                <button type="submit" class="btn btn-nexus-save shadow-sm">
-                                    <i class="fa-solid fa-floppy-disk me-2"></i> SALVAR ALTERAÇÕES
-                                </button>
+                                <button type="submit" class="btn btn-primary px-5">Salvar Alterações</button>
                             </div>
                         </div>
                     </form>
@@ -133,7 +91,6 @@ $cliente = $stmt->fetch(PDO::FETCH_ASSOC);
     </main>
 
     <?php include __DIR__ . '/../../app/views/footer.php'; ?>
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>
