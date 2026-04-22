@@ -30,5 +30,13 @@ Certifique-se de que a estrutura de pastas está correta, com a pasta assets den
 
 Acesse no seu navegador: http://localhost/seu-diretorio/techmobile/public/index.php
 
+
+## 🎥 Demonstração (em Funcionamento)
+
+
+
+
+
+
 ✍️ Desenvolvido por
 Thaís - Aluna do curso de Assistente de Desenvolvimento de Aplicativos Computacionais (SENAC).
