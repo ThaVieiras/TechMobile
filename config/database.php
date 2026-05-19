@@ -3,7 +3,7 @@
 $host = '127.0.0.1';
 $db   = 'techmobile';
 $user = 'root';
-$pass = 'SUA_SENHA_AQUI'; //Alterar senha para vazia se estiver usando o XAMPP sem senha
+$pass = ''; //Alterar senha para vazia se estiver usando o XAMPP sem senha
 $charset = 'utf8mb4';
 
 try {
