@@ -57,7 +57,18 @@ A aplicação interna é um sistema C# Windows Forms focado na gestão corporati
 ![Loja Virtual Web](Demo3.gif)
 
 ### Sistema de Gestão (C# Desktop)
-![Sistema de Gestão Desktop C#](print-csharp.png)
+<table>
+  <tr>
+    <td valign="top" width="50%">
+      <p align="center"><strong>Tela Inicial (C# Desktop)</strong></p>
+      <img src="TelaInicialDesktop.jpeg" alt="Demonstração TechMobile Web" width="100%">
+    </td>
+    <td valign="top" width="50%">
+      <p align="center"><strong>Gestão de Pedidos (C# Desktop)</strong></p>
+      <img src="GestaoProdutoDesktop.jpeg" alt="Sistema de Gestão Desktop C#" width="100%">
+    </td>
+  </tr>
+</table>
 
 ---
 
