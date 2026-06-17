@@ -1,39 +1,65 @@
-# 📱 TechMobile - E-commerce
+# 📱 TechMobile - Ecossistema Integrado (Web + Desktop)
+
+Este repositório contém a solução completa e integrada do projeto **TechMobile** (identidade de marca *Nexus Celulares*), um ecossistema corporativo de e-commerce e retaguarda administrativa de ponta a ponta. 
+
+O projeto é composto por duas aplicações independentes que se comunicam e compartilham a mesma base de dados relacional em tempo real.
+
+---
 
 ## 🎓 Sobre o Projeto
-Este projeto faz parte da Unidade Curricular (UC) de **Projeto Integrador** turma TI99 do curso de **Assistente de Desenvolvimento de Aplicativos Computacionais** do **SENAC**. 
 
-O TechMobile é uma aplicação web que simula um e-commerce completo focado na venda de smartphones e acessórios. O objetivo principal é consolidar os conhecimentos de programação front-end, back-end e modelagem de banco de dados, unindo regras de negócio e boas práticas de UX/UI.
+Este ecossistema foi desenvolvido como entrega mestre para o **Projeto Integrador** do curso de Desenvolvimento de Sistemas / Informática do **SENAC Itaquera**.
 
-## ⚙️ Funcionalidades Desenvolvidas
-* **Vitrine Dinâmica:** Exibição de produtos (Destaques e Lançamentos) carregados diretamente do banco de dados.
-* **Carrinho de Compras:** Sistema de sessão para gerenciar itens escolhidos (adicionar, subtrair, excluir) com cálculo dinâmico de subtotais e valor geral.
-* **Checkout Seguro:** Fluxo de finalização de compra com validação de login, proteção de dados via transações atômicas (`beginTransaction` e `commit`) e regra de negócio para **baixa automática de estoque**.
-* **Autenticação de Usuários:** Sistema de Login e Cadastro de clientes integrado ao banco de dados, com feedback visual amigável (Toasts/Modais).
-* **Design Responsivo:** Interface estruturada e fiel aos wireframes de alta fidelidade, garantindo usabilidade em múltiplas telas.
+O objetivo principal foi consolidar competências avançadas em:
+* **Arquitetura de Software:** Implementação rigorosa do padrão **MVC (Model-View-Controller)** em ambas as frentes.
+* **Integração de Sistemas:** Comunicação multiplataforma (Web PHP + Desktop C#) consumindo um banco de dados centralizado.
+* **Integridade e Segurança de Dados:** Controle transacional de estoque, proteção contra brechas de segurança (SQL Injection) e hashing seguro de credenciais corporativas.
 
-## 🛠️ Tecnologias Utilizadas
-* **Front-end:** HTML5, CSS3, Bootstrap 5.
-* **Back-end:** PHP 8 (Arquitetura orientada a inclusão de arquivos modulares e segurança via PDO).
-* **Banco de Dados:** MySQL (Modelagem relacional com tabelas de `produtos`, `clientes`, `pedidos`, `itens_pedidos` e `estoque`).
-* **Design & Prototipagem:** Figma.
-* **Controle de Versão:** Git & GitHub.
+---
 
-## 🚀 Como Executar o Projeto Localmente
+## 🏗️ Arquitetura Geral do Sistema
 
-1. **Pré-requisitos:** Certifique-se de ter um servidor local instalado (como XAMPP, WAMP ou MAMP) rodando os serviços do Apache e MySQL.
-2. **Clonar o Repositório:**
-   ```bash
-   git clone [https://github.com/seu-usuario/techmobile.git](https://github.com/seu-usuario/techmobile.git)
+Ambas as aplicações foram reestruturadas sob o padrão **MVC**, separando estritamente a interface do usuário (Views), as regras de negócio e consultas de persistência (Models) e a lógica de orquestração (Controllers).
 
-Certifique-se de que a estrutura de pastas está correta, com a pasta assets dentro de public.
+* 🌐 **Módulo Web (PHP 8 + Bootstrap 5)** ──► Camada View / Cliente
+  * *Persistência via PDO* ──► 🗄️ **Banco de Dados Central (MySQL)**
+* 💻 **Módulo Desktop (C# .NET 8)** ──► Backoffice / Admin
+  * *Conexão MySqlConnector* ──► 🗄️ **Banco de Dados Central (MySQL)**
 
-Acesse no seu navegador: http://localhost/seu-diretorio/techmobile/public/index.php
+---
 
+## 🌐 Módulo Web: E-Commerce (Cliente)
 
-## 🎥 Demonstração 
-![Demonstração TechMobile](Demo3.gif)
+A aplicação pública é uma loja virtual responsiva de alta energia voltada para a experiência do consumidor (UX/UI), focada em conversão e usabilidade.
 
+### ⚙️ Funcionalidades Web:
+* **Vitrine Dinâmica:** Carregamento em tempo real de produtos categorizados (Destaques, Ofertas e Lançamentos) vindos diretamente do banco de dados.
+* **Carrinho de Compras Efêmero:** Gerenciamento reativo de itens em sessão PHP (adicionar, remover, alterar quantidade e cálculo automático de frete/subtotais).
+* **Checkout Seguro:** Fluxo estruturado de finalização de pedidos condicionado à autenticação prévia do cliente.
 
-✍️ Desenvolvido por
-Thaís - Aluna do curso de Assistente de Desenvolvimento de Aplicativos Computacionais (SENAC).
+### 🛠️ Tecnologias e Camadas Web:
+* **View:** HTML5, CSS3, Bootstrap 5 e Google Fonts para uma estética Cyber Tech.
+* **Model & Persistência:** PHP Data Objects (PDO) utilizando *Prepared Statements* contra vulnerabilidades e gerenciamento de transações atômicas no checkout (`beginTransaction` e `commit`).
+
+> **Acesse no seu navegador local:** `http://localhost/seu-diretorio/techmobile/public/index.php`
+
+---
+
+## 💻 Módulo Desktop: Backoffice Administrativo
+
+A aplicação interna é um sistema C# Windows Forms focado na gestão corporativa, controle de estoque, atualização de status de pedidos e moderação de clientes com níveis de acesso estruturados.
+
+---
+
+## 🎥 Demonstração Visual
+
+### Loja Virtual (Web)
+![Loja Virtual Web](Demo3.gif)
+
+### Sistema de Gestão (C# Desktop)
+![Sistema de Gestão Desktop C#](print-csharp.png)
+
+---
+
+## ✍️ Desenvolvido por
+**Thaís Vieira** - Turma TI99 (SENAC Itaquera)
